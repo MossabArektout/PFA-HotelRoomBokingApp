@@ -21,7 +21,8 @@ return new class extends Migration
             $table->boolean('workspace')->default(false);
             $table->boolean('TV')->default(false);
             $table->boolean('wifi')->default(false);
-            $table->boolean('minibar')->default(false);      
+            $table->boolean('minibar')->default(false);
+            $table->decimal('price', 8, 2);      
             $table->timestamps();
         });
     }
