@@ -18,4 +18,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Types::class);
     }
+
+    public function feature()
+    {
+        return $this->belongsTo(Types::class, 'id_feature');
+    }
 }
