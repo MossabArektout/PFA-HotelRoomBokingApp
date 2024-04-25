@@ -19,7 +19,7 @@
                         <form action="{{ route('process.payment', ['roomId' => $roomId, 'amount' => $amount]) }}" method="POST">
                             @csrf
                             <input type="hidden" name="room_id" value="{{ $roomId }}">
-                            <input type="hidden" name="amount" value="{{$amount }}">
+                            <input type="hidden" name="amount" value="{{ $amount }}">
                             <div class="form-group">
                                 <label for="cardNumber">Card Number</label>
                                 <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter card number">
@@ -27,7 +27,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="expiryDate">Expiry Date</label>
-                                    <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY">
+                                    <input type="date" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="cvv">CVV</label>
