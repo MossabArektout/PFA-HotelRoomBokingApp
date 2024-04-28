@@ -1,11 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TypesController;
-use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReservationController;
 
-Route::get('/', [TypesController::class, 'getTypes']);
+Route::get('/', [UserController::class, "showCorrectHomepage"]);
+// Route::get('/reservationForm', [TypesController::class, 'getTypes']);
+
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+
+Route::get('/login', [UserController::class, 'showLoginPage'])->name('login');
+
+
 Route::post('/show-rooms', [ReservationController::class, 'showRooms'])->name('reservation.showRooms');
 
 // Route to show the payment form
@@ -17,3 +25,4 @@ Route::post('/payment/process', [PaymentController::class, 'processPayment'])->n
 // Route to handle webhook events from Stripe
 Route::post('/stripe/webhook', [PaymentController::class, 'handleWebhook'])->name('stripe.webhook');
 
+Route::post('/register', [UserController::class, 'register'])->middleware('guest');

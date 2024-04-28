@@ -34,4 +34,3 @@ class TypesController extends Controller
     }
     
 }
-
