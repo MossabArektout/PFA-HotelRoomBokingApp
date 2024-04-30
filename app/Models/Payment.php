@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Payment extends Model
 {
@@ -11,5 +12,10 @@ class Payment extends Model
 
     protected $table = 'payments';
 
-    protected $fillable = ['id', 'room_id', 'amount'];
+    protected $fillable = ['id', 'room_id', 'amount', 'startdate', 'enddate'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

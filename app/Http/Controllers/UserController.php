@@ -30,7 +30,8 @@ class UserController extends Controller
             return view('reservationForm', ['types' => $types]);
         }
         else{
-            return view('registration');
+            $types = Types::all();
+            return view('homepage', ['types' => $types]);
         }
     }
 
@@ -40,6 +41,7 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
+        // dd($request);
         $incomingFields = $request -> validate([
             'email' => 'required',
             'password' => 'required' 

@@ -11,7 +11,9 @@ Route::get('/', [UserController::class, "showCorrectHomepage"]);
 
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
-Route::get('/login', [UserController::class, 'showLoginPage'])->name('login');
+// Route::get('/login', [UserController::class, 'showLoginPage']);
+
+Route::post('/login', [UserController::class, 'login'])->name('login');
 
 
 Route::post('/show-rooms', [ReservationController::class, 'showRooms'])->name('reservation.showRooms');
@@ -26,3 +28,5 @@ Route::post('/payment/process', [PaymentController::class, 'processPayment'])->n
 Route::post('/stripe/webhook', [PaymentController::class, 'handleWebhook'])->name('stripe.webhook');
 
 Route::post('/register', [UserController::class, 'register'])->middleware('guest');
+
+Route::get('/rooms/{roomId}', [ReservationController::class, 'showRoomDetails'])->name('room.details');

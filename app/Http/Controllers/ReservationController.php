@@ -22,4 +22,10 @@ class ReservationController extends Controller
         // Pass the rooms collection to the view
         return view('show-rooms', ['rooms' => $rooms]);
     }
+
+    public function showRoomDetails($roomId)
+    {
+        $room = Reservation::findOrFail($roomId);
+        return view('room_details', compact('room'));   
+    }
 }

@@ -19,12 +19,12 @@
         <form action="{{ route('reservation.showRooms') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="start_date">Start Date:</label>
-                <input type="date" class="form-control" id="start_date" name="start_date" required>
+                <label for="startdate">Start Date:</label>
+                <input type="date" class="form-control" id="startdate" name="startdate" required>
             </div>
             <div class="form-group">
-                <label for="end_date">End Date:</label>
-                <input type="date" class="form-control" id="end_date" name="end_date" required>
+                <label for="enddate">End Date:</label>
+                <input type="date" class="form-control" id="enddate" name="enddate" required>
             </div>
             <div class="form-group">
                 <label for="room_type">Room Type:</label>
