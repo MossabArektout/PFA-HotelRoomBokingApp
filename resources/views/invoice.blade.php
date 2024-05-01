@@ -54,7 +54,7 @@
         <p><strong>Reservation Information:</strong></p>
         {{-- <p>Check-in Date: {{ $reservation->check_in_date }}</p>
         <p>Check-out Date: {{ $reservation->check_out_date }}</p> --}}
-        <p>Total Amount: {{ $type->price }}</p>
+        <p>Total Amount: {{ $room->price }}</p>
     </div>
     <!-- You can add more details or customize the layout as needed -->
 </body>

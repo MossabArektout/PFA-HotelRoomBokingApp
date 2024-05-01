@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TypesController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReservationController;
@@ -30,3 +31,11 @@ Route::post('/stripe/webhook', [PaymentController::class, 'handleWebhook'])->nam
 Route::post('/register', [UserController::class, 'register'])->middleware('guest');
 
 Route::get('/rooms/{roomId}', [ReservationController::class, 'showRoomDetails'])->name('room.details');
+
+Route::get('/dashboard', [AdminController::class, 'showDashboardPage'])->name('dashboard');
+
+Route::post('/admin/store-room', [AdminController::class, 'storeRoom'])->name('admin.store_room');
+
+Route::get('/admin/show-room-admin', [AdminController::class, 'manageRooms'])->name('manageRooms');
+
+Route::delete('/admin/{room}', [AdminController::class, 'destroy'])->name('admin.destroy');

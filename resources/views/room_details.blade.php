@@ -80,7 +80,7 @@
                             @if ($room->feature->minibar)
                                 <li>Minibar</li>
                             @endif
-                            <li>Price: {{ $room->feature->price }} MAD</li>
+                            <li>Price: {{ $room->price }} MAD</li>
                         </ul>
                     </div>
                 </div>
@@ -93,11 +93,11 @@
                     </div>
                     <div class="card-body">
                         <form id="paymentForm"
-                            action="{{ route('process.payment', ['roomId' => $room->id, 'amount' => $room->feature->price]) }}"
+                            action="{{ route('process.payment', ['roomId' => $room->id, 'amount' => $room->price]) }}"
                             method="POST">
                             @csrf
                             <input type="hidden" name="room_id" value="{{ $room->id }}">
-                            <input type="hidden" name="amount" value="{{ $room->feature->price }}">
+                            <input type="hidden" name="amount" value="{{ $room->price }}">
                             <div class="form-group position-relative credit-card-input mb-4">
                                 <label for="cardNumber">Card Number</label>
                                 <input type="text" class="form-control" id="cardNumber" name="cardNumber"

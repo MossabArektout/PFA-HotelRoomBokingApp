@@ -15,6 +15,11 @@
             @csrf
             <button class="btn btn-sm btn-secondary">Sign Out</button>
         </form>
+        {{-- @dd(auth()->user()->isAdmin); --}}
+        @if (auth()->user()->isAdmin)
+            <a href="{{ route('dashboard') }}" class="btn btn-primary">Dashboard</a>
+        @endif
+
         <h2 class="mt-5 mb-4">Room Reservation Form</h2>
         <form action="{{ route('reservation.showRooms') }}" method="POST">
             @csrf

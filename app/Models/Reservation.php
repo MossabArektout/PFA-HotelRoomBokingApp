@@ -13,7 +13,7 @@ class Reservation extends Model
 
     protected $table = 'rooms';
 
-    protected $fillable = ['id', 'numero', 'id_feature', 'avalibility', 'images'];
+    protected $fillable = ['numero', 'price', 'id_feature', 'availability', 'images'];
 
     public function type()
     {

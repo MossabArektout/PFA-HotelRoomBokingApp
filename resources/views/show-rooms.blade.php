@@ -26,7 +26,7 @@
                                 <img src="{{ asset($firstImage) }}" class="card-img-top" style="height: 200px;">
                                 <div class="card-body">
                                     <h5>{{ $room->numero }}</h5>
-                                    <h6 class="mb-4">{{ $room->feature->price }} MAD per night</h6>
+                                    <h6 class="mb-4">{{ $room->price }} MAD per night</h6>
                                     <div class="features mb-4">
                                         <h6 class="mb-1">Features</h6>
                                         @if ($room->feature->number_of_rooms)
@@ -75,7 +75,7 @@
                                         </span>
                                     </div>
                                     <div class="d-flex justify-content-evenly mb-2">
-                                        <a href="{{ route('payment.form', ['roomId' => $room->id, 'amount' => $room->feature->price]) }}"
+                                        <a href="{{ route('payment.form', ['roomId' => $room->id, 'amount' => $room->price]) }}"
                                             class="btn btn-sm text-white custom-bg shadow-none">Reserve</a>
                                         <a href="{{ route('room.details', ['roomId' => $room->id]) }}"
                                             class="btn btn-sm btn-outline-dark shadow-none">More details</a>
