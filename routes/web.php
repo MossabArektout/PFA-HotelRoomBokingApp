@@ -31,6 +31,8 @@ Route::get('/rooms/{roomId}', [ReservationController::class, 'showRoomDetails'])
 
 Route::get('/dashboard', [AdminController::class, 'showDashboardPage'])->name('dashboard');
 
+Route::get('/admin/add-form', [AdminController::class, 'showAddRoomForm'])->name('admin.add-room');
+
 Route::post('/admin/store-room', [AdminController::class, 'storeRoom'])->name('admin.store_room');
 
 Route::get('/admin/show-room-admin', [AdminController::class, 'manageRooms'])->name('manageRooms');

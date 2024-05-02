@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Types;
+use App\Models\Payment;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function showDashboardPage(){
+        $totalClients = User::count();
+        $totalOrders = Payment::count();
+        $totalRevenue = Payment::sum('amount');
+
+        return view('dashboard-admin', compact('totalClients', 'totalOrders', 'totalRevenue'));
+    }
+    public function showAddRoomForm(){
         $types = Types::all();
         return view('addroom', ['types' => $types]);
     }

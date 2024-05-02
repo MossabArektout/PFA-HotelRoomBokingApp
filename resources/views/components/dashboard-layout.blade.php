@@ -513,10 +513,9 @@
 
     <nav role='navigation'>
         <ul class="main">
-            <li class="dashboard"><a href="admindashboard">Dashboard</a></li>
-            <li class="edit"><a href="#">Statistiques</a></li>
+            <li class="dashboard"><a href="{{ Route('dashboard') }}">Dashboard</a></li>
             <li class="rooms"><a href="{{ Route('manageRooms') }}">Voir les chambres</a></li>
-            <li class="write"><a href="{{ Route('dashboard') }}">Ajouter des chambres</a></li>
+            <li class="write"><a href="{{ Route('admin.add-room') }}">Ajouter des chambres</a></li>
             <li class="write"><a href="{{ Route('admin.addNewType') }}">Ajouter de nouveaux types</a></li>
             <li class="comments"><a href="#">Feedback</a></li>
         </ul>
