@@ -499,7 +499,15 @@
         <ul class="utilities">
             <br>
             <li class="users"><a href="#">My Account</a></li>
-            <li class="logout warn"><a href="">Log Out</a></li>
+            <li class="logout warn">
+                <form method="POST" action="/logout">
+                    @csrf
+                    <button type="submit"
+                        style="border: none; background: none; padding: 0; font: inherit; cursor: pointer; color: inherit; display: block; padding: 0.7em;">
+                        <i class="fa fa-sign-out"></i> Log Out
+                    </button>
+                </form>
+            </li>
         </ul>
     </header>
 
@@ -507,8 +515,9 @@
         <ul class="main">
             <li class="dashboard"><a href="admindashboard">Dashboard</a></li>
             <li class="edit"><a href="#">Statistiques</a></li>
-            <li class="write"><a href="{{ Route('manageRooms') }}">Voir les chambres</a></li>
+            <li class="rooms"><a href="{{ Route('manageRooms') }}">Voir les chambres</a></li>
             <li class="write"><a href="{{ Route('dashboard') }}">Ajouter des chambres</a></li>
+            <li class="write"><a href="{{ Route('admin.addNewType') }}">Ajouter de nouveaux types</a></li>
             <li class="comments"><a href="#">Feedback</a></li>
         </ul>
     </nav>

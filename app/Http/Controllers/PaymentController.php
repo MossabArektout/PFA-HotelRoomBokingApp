@@ -16,63 +16,46 @@ class PaymentController extends Controller
     return view('payment', compact('roomId', 'amount'));
 }
 
-    // public function processPayment(Request $request)
-    // {
-    //     // Retrieve roomId and amount from the request
-    //     $roomId = $request->input('roomId');
-    //     $amount = $request->input('amount');
-    
-    //     // Create a new payment record
-    //     $paymentData = [
-    //         'room_id' => $roomId,
-    //         'amount' => $amount,
-    //     ];
-    
-    //     $payment = Payment::create($paymentData);
-    
-    //     // Optionally, you can return the created payment record as a response
-    //     return 'parfait';
-    // }
+public function processPayment(Request $request)
+{
+    // Retrieve roomId and amount from the request
+    $roomId = $request->input('roomId');
+    $amount = $request->input('amount');
+    $user = Auth::user();
+    $startdate = $request->input('startdate');
+    $enddate = $request->input('enddate');
 
-    public function processPayment(Request $request)
-    {
-        // Retrieve roomId and amount from the request
-        $roomId = $request->input('roomId');
-        $amount = $request->input('amount');
+    // Retrieve room and reservation information
+    $room = Reservation::where('id', $roomId)->firstOrFail();
 
-        // Retrieve authenticated user
-        $user = Auth::user();
+    $type = Types::where('id', $room->id_feature)->firstOrFail();
 
-        // Retrieve room and reservation information
-        $room = Reservation::where('id', $roomId)->firstOrFail();
-        // dd($room);
+    // Generate PDF
+    $pdf = Pdf::loadView('invoice', ['user' => $user, 'room' => $room, 'type' => $type, 'startdate' => $startdate, 'enddate' => $enddate]);
 
-        $type = Types::where('id', $room->id_feature)->firstOrFail();
+    // Save or stream PDF
+    $pdfFileName = 'invoice_' . time() . '.pdf'; // You can customize the file name
+    $pdf->save(public_path('pdf/' . $pdfFileName)); // Save PDF to a public directory
+    // Or you can stream the PDF directly to the browser:
+    // return $pdf->stream();
 
-        // Generate PDF
-        $pdf = Pdf::loadView('invoice', ['user' => $user, 'room' => $room, 'type' => $type]);
+    // Create a new payment record with user_id
+    $paymentData = [
+        'room_id' => $roomId,
+        'amount' => $amount,
+        'user_id' => $user->id,
+        'startdate' => $startdate,
+        'enddate' => $enddate,
+        'pdf_path' => 'pdf/' . $pdfFileName, // Optional: Save the path to the PDF in the database
+    ];
 
-        // Save or stream PDF
-        $pdfFileName = 'invoice_' . time() . '.pdf'; // You can customize the file name
-        $pdf->save(public_path('pdf/' . $pdfFileName)); // Save PDF to a public directory
-        // Or you can stream the PDF directly to the browser:
-        // return $pdf->stream();
+    $payment = Payment::create($paymentData);
 
-        // Create a new payment record with user_id
-        $paymentData = [
-            'room_id' => $roomId,
-            'amount' => $amount,
-            'user_id' => $user->id,
-            'pdf_path' => 'pdf/' . $pdfFileName, // Optional: Save the path to the PDF in the database
-        ];
+    // Update the availability status of the room to 0
+    $room->avalibility = 0; // Assuming the column name is 'availability', adjust if needed
+    $room->save();
 
-        $payment = Payment::create($paymentData);
-
-        // Update the availability status of the room to 0
-        $room->avalibility = 0; // Assuming the column name is 'availability', adjust if needed
-        $room->save();
-
-        // Optionally, you can return a success message or redirect to a success page
-        return 'Payment successful. PDF generated: <a href="' . url('pdf/' . $pdfFileName) . '">Download PDF</a>';
-}
+    // Optionally, you can return a success message or redirect to a success page
+    return view('payment-done', ['pdfFileName' => $pdfFileName]);
+    }
 }

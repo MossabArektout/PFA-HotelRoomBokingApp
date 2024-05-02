@@ -29,4 +29,9 @@ class Reservation extends Model
     {
         return $this->hasMany(Image::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'room_id');
+    }
 }

@@ -11,28 +11,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        .credit-card-input input[type="text"] {
-            width: 100%;
-            padding-left: 40px;
-            padding-right: 40px;
-            border-radius: 5px;
-            font-size: 16px;
-            line-height: 2.2;
+        body {
+            background-color: #f8f9fa;
         }
 
-        .credit-card-input input[type="text"]::placeholder {
-            color: #ccc;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .credit-card-input .cc-icon {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #aaa;
-            pointer-events: none;
+        .card {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
         }
 
         .card-header,
@@ -93,11 +77,13 @@
                     </div>
                     <div class="card-body">
                         <form id="paymentForm"
-                            action="{{ route('process.payment', ['roomId' => $room->id, 'amount' => $room->price]) }}"
+                            action="{{ route('process.payment', ['roomId' => $room->id, 'amount' => $room->price, 'startdate' => $startdate, 'enddate' => $enddate]) }}"
                             method="POST">
                             @csrf
                             <input type="hidden" name="room_id" value="{{ $room->id }}">
                             <input type="hidden" name="amount" value="{{ $room->price }}">
+                            <input type="hidden" name="startdate" value="{{ $startdate }}">
+                            <input type="hidden" name="endtdate" value="{{ $enddate }}">
                             <div class="form-group position-relative credit-card-input mb-4">
                                 <label for="cardNumber">Card Number</label>
                                 <input type="text" class="form-control" id="cardNumber" name="cardNumber"

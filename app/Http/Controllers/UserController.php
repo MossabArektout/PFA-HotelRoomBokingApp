@@ -17,7 +17,7 @@ class UserController extends Controller
             'password' => ['required', 'min:6', 'confirmed']
         ]);
 
-        $incomingFields['password'] = bcrypt($incomingFields['password']);
+        $incomingFpields['password'] = bcrypt($incomingFields['password']);
 
         $user = User::create($incomingFields);
         auth() -> login($user);
@@ -25,14 +25,8 @@ class UserController extends Controller
     }
     
     public function showCorrectHomepage(Types $types){
-        if (auth()->check()){
-            $types = Types::all();
-            return view('reservationForm', ['types' => $types]);
-        }
-        else{
-            $types = Types::all();
-            return view('homepage', ['types' => $types]);
-        }
+        $types = Types::all();
+        return view('homepage', ['types' => $types]);
     }
 
     public function logout(){

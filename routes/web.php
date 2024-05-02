@@ -25,9 +25,6 @@ Route::get('/payment/{roomId}/{amount}', [PaymentController::class, 'showPayment
 // Route to process the payment
 Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('process.payment');
 
-// Route to handle webhook events from Stripe
-Route::post('/stripe/webhook', [PaymentController::class, 'handleWebhook'])->name('stripe.webhook');
-
 Route::post('/register', [UserController::class, 'register'])->middleware('guest');
 
 Route::get('/rooms/{roomId}', [ReservationController::class, 'showRoomDetails'])->name('room.details');
@@ -39,3 +36,11 @@ Route::post('/admin/store-room', [AdminController::class, 'storeRoom'])->name('a
 Route::get('/admin/show-room-admin', [AdminController::class, 'manageRooms'])->name('manageRooms');
 
 Route::delete('/admin/{room}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+Route::get('/admin/{room}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+
+Route::post('admin/{room}', [AdminController::class, 'actuallyUpdate'])->name('admin.actuallyUpdate');
+
+Route::get('/admin/add-type', [AdminController::class, 'addNewType'])->name('admin.addNewType');
+
+Route::post('/dashboard', [AdminController::class, 'storeType'])->name('admin.store-type');

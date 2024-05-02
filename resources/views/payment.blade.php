@@ -59,11 +59,13 @@
                     </div>
                     <div class="card-body">
                         <form id="paymentForm"
-                            action="{{ route('process.payment', ['roomId' => $roomId, 'amount' => $amount]) }}"
+                            action="{{ route('process.payment', ['roomId' => $roomId, 'amount' => $amount, 'startdate' => $startdate, 'enddate' => $enddate]) }}"
                             method="POST">
                             @csrf
                             <input type="hidden" name="room_id" value="{{ $roomId }}">
                             <input type="hidden" name="amount" value="{{ $amount }}">
+                            <input type="hidden" name="startdate" value="{{ $startdate }}">
+                            <input type="hidden" name="enddate" value="{{ $enddate }}">
                             <div class="form-group position-relative credit-card-input mb-4">
                                 <label for="cardNumber">Card Number</label>
                                 <input type="text" class="form-control" id="cardNumber" name="cardNumber"

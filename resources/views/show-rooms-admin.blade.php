@@ -23,7 +23,7 @@
                                 <button type="submit" class="action-btn"
                                     onclick="return confirm('Are you sure you want to delete this incident?')">Supprimer</button>
                             </form>
-                            <button>Update</button>
+                            <a href="{{ route('admin.edit', $room) }}" class="action-btn">Modifier</a>
                         </td>
                     </tr>
                 @endforeach

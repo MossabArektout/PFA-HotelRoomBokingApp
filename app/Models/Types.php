@@ -12,7 +12,7 @@ class Types extends Model
 
     protected $table = 'room_features';
 
-    protected $fillable = ['type', 'number_of_rooms', 'number_of_beds', 'bathroom', 'balcony', 'workspace', 'TV', 'wifi'. 'minibar', 'price'];
+    protected $fillable = ['type', 'number_of_rooms', 'number_of_beds', 'bathroom', 'balcony', 'workspace', 'TV', 'wifi'. 'minibar'];
 
     public function rooms()
     {
