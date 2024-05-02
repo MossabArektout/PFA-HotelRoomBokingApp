@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    public function showPaymentForm($roomId, $amount)
+    public function showPaymentForm($roomId, $amount, Request $request)
 {
-    return view('payment', compact('roomId', 'amount'));
+    $room = Reservation::findOrFail($roomId);
+    $startdate = $request->input('startdate');
+    $enddate = $request->input('enddate');
+    return view('payment', compact('room', 'amount', 'startdate', 'enddate'));
 }
 
 public function processPayment(Request $request)

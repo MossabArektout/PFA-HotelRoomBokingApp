@@ -1,155 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Details and Payment</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .card {
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-        }
-
-        .card-header,
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container mt-5">
+<x-layout>
+    <div class="container">
         <div class="row">
-            <!-- Room Information Section -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="text-center mb-0">Room Details</h3>
-                    </div>
-                    <div class="card-body">
-                        <h5>{{ $room->numero }}</h5>
-                        <ul>
-                            <li>{{ $room->feature->number_of_rooms }}
-                                Room{{ $room->feature->number_of_rooms != 1 ? 's' : '' }}</li>
-                            <li>{{ $room->feature->number_of_beds }} Beds</li>
-                            <li>{{ $room->feature->bathroom }} Bathroom</li>
-                            @if ($room->feature->balcony)
-                                <li>Balcony</li>
-                            @endif
-                            @if ($room->feature->workspace)
-                                <li>Workspace</li>
-                            @endif
-                            @if ($room->feature->TV)
-                                <li>TV</li>
-                            @endif
-                            @if ($room->feature->wifi)
-                                <li>WiFi</li>
-                            @endif
-                            @if ($room->feature->minibar)
-                                <li>Minibar</li>
-                            @endif
-                            <li>Price: {{ $room->price }} MAD</li>
-                        </ul>
-                    </div>
+            <div class="col-12 my-5 px-4">
+                <h2 class="fw-bold">{{ $room->feature->type }}</h2>
+                <div style="font-size: 14px;">
+                    <a href="#" class="text-secondary text-decoration-none">Home</a>
+                    <span class="text-secondary"> / </span>
+                    <a href="#" class="text-secondary text-decoration-none">Rooms</a>
                 </div>
             </div>
-            <!-- Payment Form Section -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="text-center mb-0">Payment Details</h3>
+
+            <div class="col-lg-7 col-md-12 px-4">
+                <div id="roomCarousel" class="carousel slide">
+                    <div class="carousel-inner" style="height: 400px;">
+                        @php
+                            $images = json_decode($room->images);
+                        @endphp
+                        @foreach ($images as $index => $image)
+                            <div class="carousel-item @if ($index === 0) active @endif">
+                                <img src="{{ asset($image) }}" class="d-block w-100" style="height: 100%;"
+                                    alt="Image {{ $index }}">
+                            </div>
+                        @endforeach
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#roomCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#roomCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-12 px-4">
+                <div class="card md-4 border-0 shadow-sm rounded-3">
                     <div class="card-body">
-                        <form id="paymentForm"
-                            action="{{ route('process.payment', ['roomId' => $room->id, 'amount' => $room->price, 'startdate' => $startdate, 'enddate' => $enddate]) }}"
-                            method="POST">
-                            @csrf
-                            <input type="hidden" name="room_id" value="{{ $room->id }}">
-                            <input type="hidden" name="amount" value="{{ $room->price }}">
-                            <input type="hidden" name="startdate" value="{{ $startdate }}">
-                            <input type="hidden" name="endtdate" value="{{ $enddate }}">
-                            <div class="form-group position-relative credit-card-input mb-4">
-                                <label for="cardNumber">Card Number</label>
-                                <input type="text" class="form-control" id="cardNumber" name="cardNumber"
-                                    placeholder="XXXX XXXX XXXX XXXX" required>
-                                <i class="cc-icon fas fa-credit-card"></i>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="expiryDate">Expiry Date</label>
-                                    <input type="text" class="form-control" id="expiryDate" name="expiryDate"
-                                        placeholder="MM/YY" required>
-                                    <small id="expiryDateMessage" class="form-text text-danger"></small>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="cvv">CVV</label>
-                                    <input type="text" class="form-control" id="cvv" name="cvv"
-                                        placeholder="CVV" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="cardholderName">Cardholder Name</label>
-                                <input type="text" class="form-control" id="cardholderName" name="cardholderName"
-                                    placeholder="Enter cardholder name" required>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary btn-block">Pay Now</button>
-                            </div>
-                        </form>
+                        <h5 class="mb-4">{{ $room->numero }}</h5>
+                        <h4 class="mb-4">{{ $room->price }} MAD/nuit</h4>
+                        <div class="facilities mb-4">
+                            <h6 class="mb-1">Description</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut dui sit amet eros maximus
+                                faucibus</p>
+                        </div>
+                        <div class="features mb-4">
+                            <h6 class="mb-1">Caractéristiques</h6>
+                            @if ($room->feature->number_of_rooms)
+                                <span
+                                    class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->number_of_rooms }}
+                                    Chambres</span>
+                            @endif
+                            @if ($room->feature->number_of_beds)
+                                <span
+                                    class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->number_of_beds }}
+                                    Lits</span>
+                            @endif
+                            @if ($room->feature->bathroom)
+                                <span
+                                    class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->bathroom }}
+                                    Salle de bain</span>
+                            @endif
+                            @if ($room->feature->balcony)
+                                <span
+                                    class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->balcony }}
+                                    Balcon</span>
+                            @endif
+                            @if ($room->feature->workspace)
+                                <span
+                                    class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->workspace }}
+                                    Espace de travail</span>
+                            @endif
+                        </div>
+                        <div class="facilities mb-4">
+                            <h6 class="mb-1">Équipements</h6>
+                            @if ($room->feature->TV == 1)
+                                <span class="badge rounded-pill bg-light text-dark text-wrap">TV</span>
+                            @endif
+                            @if ($room->feature->wifi == 1)
+                                <span class="badge rounded-pill bg-light text-dark text-wrap">Wifi</span>
+                            @endif
+                        </div>
+                        <a href="{{ route('payment.form', ['roomId' => $room->id, 'amount' => $room->price, 'startdate' => $startdate, 'enddate' => $enddate]) }}"
+                            class="btn w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <!-- Custom JavaScript -->
-    <script>
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let target = e.target;
-            let input = target.value.replace(/\D/g, '').substring(0, 16);
-            input = input != '' ? input.match(/.{1,4}/g).join(' ') : '';
-            target.value = input;
-        });
-
-        document.getElementById('expiryDate').addEventListener('change', function(e) {
-            let enteredDate = e.target.value;
-            let currentDate = new Date();
-            let currentYear = currentDate.getFullYear() % 100; // Get last two digits of the year
-            let currentMonth = currentDate.getMonth() + 1; // Month is zero-based, so add 1
-
-            if (enteredDate.length === 5) {
-                let month = parseInt(enteredDate.substring(0, 2));
-                let year = parseInt(enteredDate.substring(3));
-
-                if (year < currentYear || (year === currentYear && month < currentMonth)) {
-                    document.getElementById('expiryDateMessage').textContent = 'Card is expired.';
-                    document.getElementById('expiryDate').classList.add('is-invalid');
-                } else {
-                    document.getElementById('expiryDateMessage').textContent = '';
-                    document.getElementById('expiryDate').classList.remove('is-invalid');
-                }
-            }
-        });
-    </script>
-</body>
-
-</html>
+</x-layout>
