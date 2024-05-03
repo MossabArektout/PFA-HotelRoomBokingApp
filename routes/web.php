@@ -5,9 +5,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TypesController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ResetpwdController;
 use App\Http\Controllers\ReservationController;
 
-Route::get('/', [UserController::class, "showCorrectHomepage"]);
+Route::get('/', [UserController::class, "showCorrectHomepage"])->name('showHomePage');
 // Route::get('/reservationForm', [TypesController::class, 'getTypes']);
 
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
@@ -46,3 +47,11 @@ Route::post('admin/{room}', [AdminController::class, 'actuallyUpdate'])->name('a
 Route::get('/admin/add-type', [AdminController::class, 'addNewType'])->name('admin.addNewType');
 
 Route::post('/dashboard', [AdminController::class, 'storeType'])->name('admin.store-type');
+
+Route::get('/forget-password', [ResetpwdController::class, 'forgetPassword'])->name('forget.password');
+
+Route::post('/forget-password', [ResetpwdController::class, 'forgetPasswordPost'])->name('forget.password.post');
+
+Route::get('/reset-password/{token}', [ResetpwdController::class, 'resetPassword'])->name('reset.password');
+
+Route::post('/reset-password', [ResetpwdController::class, 'resetPasswordPost'])->name('reset.password.post');
