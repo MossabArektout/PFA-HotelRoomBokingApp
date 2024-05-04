@@ -63,162 +63,76 @@
     <!--Rooms-->
     <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">OUR ROOMS</h2>
 
-    <div class="container">
+    <div class="container" id="rooms">
         <div class="row">
-            <div class="col-lg-4 col-md-6 my-3">
-                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                    <img src="{{ asset('images/rooms/1.jpg') }}" class="card-img-top">
-                    <div class="card-body">
-                        <h5>Family Room</h5>
-                        <h6 class="mb-4">450 MAD per night</h6>
-                        <div class="features mb-4">
-                            <h6 class="mb-1">Features</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                2 Rooms
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                1 Bathroom
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                1 Balcony
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                2 Sofa
-                            </span>
-                        </div>
-                        <div class="facilities mb-4">
-                            <h6 class="mb-1">Facilities</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                Wifi
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                TV
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                AC
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                Room header
-                            </span>
-                        </div>
-                        <div class="rating nb-4">
-                            <h6 class="mb-1">Rating</h6>
-                            <span class="badge rounded-pill bg-light">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-evenly mb-2">
-                            <a href="#" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
-                            <a href="#" class="btn btn-sm btn-outline-dark shadow-none">More details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 my-3">
-                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                    <img src="{{ asset('images/rooms/2.png') }}" class="card-img-top">
-                    <div class="card-body">
-                        <h5>Standard Room</h5>
-                        <h6 class="mb-4">200 MAD per night</h6>
-                        <div class="features mb-4">
-                            <h6 class="mb-1">Features</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                1 Rooms
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                1 Bathroom
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                1 Sofa
-                            </span>
-                        </div>
-                        <div class="facilities mb-4">
-                            <h6 class="mb-1">Facilities</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                Wifi
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                TV
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                AC
-                            </span>
-                        </div>
-                        <div class="rating nb-4">
-                            <h6 class="mb-1">Rating</h6>
-                            <span class="badge rounded-pill bg-light">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-evenly mb-2">
-                            <a href="#" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
-                            <a href="#" class="btn btn-sm btn-outline-dark shadow-none">More details</a>
+            @foreach ($randomRooms as $room)
+                <div class="col-lg-4 col-md-6 my-3">
+                    <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
+                        @php
+                            $images = json_decode($room->images);
+                            $firstImage = reset($images);
+                        @endphp
+                        <img src="{{ asset($firstImage) }}" class="card-img-top" style="height: 200px;">
+                        <div class="card-body">
+                            <h5>{{ $room->feature->type }}</h5>
+                            <h6 class="mb-4">{{ $room->price }} MAD/night</h6>
+                            <div class="features mb-4">
+                                <h6 class="mb-1">Features</h6>
+                                @if ($room->feature->number_of_rooms)
+                                    <span
+                                        class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->number_of_rooms }}
+                                        Chambres</span>
+                                @endif
+                                @if ($room->feature->number_of_beds)
+                                    <span
+                                        class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->number_of_beds }}
+                                        Lits</span>
+                                @endif
+                                @if ($room->feature->bathroom)
+                                    <span
+                                        class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->bathroom }}
+                                        Salle de bain</span>
+                                @endif
+                                @if ($room->feature->balcony)
+                                    <span
+                                        class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->balcony }}
+                                        Balcon</span>
+                                @endif
+                                @if ($room->feature->workspace)
+                                    <span
+                                        class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->workspace }}
+                                        Espace de travail</span>
+                                @endif
+                            </div>
+                            <div class="facilities mb-4">
+                                <h6 class="mb-1">Facilities</h6>
+                                @if ($room->feature->TV == 1)
+                                    <span class="badge rounded-pill bg-light text-dark text-wrap">TV</span>
+                                @endif
+                                @if ($room->feature->wifi == 1)
+                                    <span class="badge rounded-pill bg-light text-dark text-wrap">Wifi</span>
+                                @endif
+                            </div>
+                            <div class="rating nb-4">
+                                <h6 class="mb-1">Rating</h6>
+                                <span class="badge rounded-pill bg-light">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-evenly mb-2">
+                                <a href="#" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
+                                <a href="#" class="btn btn-sm btn-outline-dark shadow-none">More details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 my-3">
-                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                    <img src="{{ asset('images/rooms/6.png') }}" class="card-img-top">
-                    <div class="card-body">
-                        <h5>Deluxe Room</h5>
-                        <h6 class="mb-4">350 MAD per night</h6>
-                        <div class="features mb-4">
-                            <h6 class="mb-1">Features</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                2 Rooms
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                2 Bathroom
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                1 Balcony
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                workSpace
-                            </span>
-                        </div>
-                        <div class="facilities mb-4">
-                            <h6 class="mb-1">Facilities</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                Wifi
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                TV
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                AC
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                Room header
-                            </span>
-                        </div>
-                        <div class="rating nb-4">
-                            <h6 class="mb-1">Rating</h6>
-                            <span class="badge rounded-pill bg-light">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-evenly mb-2">
-                            <a href="#" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
-                            <a href="#" class="btn btn-sm btn-outline-dark shadow-none">More details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
             <div class="col-lg-12 text-center mt-5">
-                <a href="#" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Rooms>>></a>
+                <a href="#" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More
+                    Rooms>>></a>
             </div>
         </div>
     </div>
@@ -227,7 +141,7 @@
 
     <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">OUR FACILITIES</h2>
 
-    <div class="container">
+    <div class="container" id="facilities">
         <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
             <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
                 <img src="{{ asset('images/facilities/WIFI.svg') }}" width="80px">

@@ -99,6 +99,8 @@
                                     </span>
                                 </div>
                                 <div class="d-flex justify-content-evenly mb-2">
+                                    <a href="{{ route('payment.form', ['roomId' => $room->id, 'amount' => $room->price, 'startdate' => $startdate, 'enddate' => $enddate]) }}"
+                                        class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
                                     <a href="{{ route('room.details', ['roomId' => $room->id, 'amount' => $room->price, 'startdate' => $startdate, 'enddate' => $enddate]) }}"
                                         class="btn btn-sm btn-outline-dark shadow-none">Plus de détails</a>
                                 </div>

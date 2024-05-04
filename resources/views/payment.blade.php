@@ -65,13 +65,15 @@
                                 <div class="form-group col-md-6">
                                     <label for="expiryDate">Expiry Date</label>
                                     <input type="text" class="form-control" id="expiryDate" name="expiryDate"
-                                        placeholder="MM/YY" required>
+                                        placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}"
+                                        title="Please enter a valid date (MM/YY)" required>
                                     <small id="expiryDateMessage" class="form-text text-danger"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="cvv">CVV</label>
                                     <input type="text" class="form-control" id="cvv" name="cvv"
-                                        placeholder="CVV" required>
+                                        placeholder="CVV" pattern="\d{3}" title="CVV must contain 3 numbers" required>
+                                    <small id="cvvMessage" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -87,6 +89,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
     <!-- Bootstrap JS -->

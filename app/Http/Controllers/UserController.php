@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Types;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Models\Types;
 
 class UserController extends Controller
 {
@@ -26,7 +27,8 @@ class UserController extends Controller
     
     public function showCorrectHomepage(Types $types){
         $types = Types::all();
-        return view('homepage', ['types' => $types]);
+        $randomRooms = Reservation::inRandomOrder()->limit(3)->get(); // Fetch three random rooms
+        return view('homepage', ['types' => $types, 'randomRooms' => $randomRooms]);
     }
 
     public function logout(){
