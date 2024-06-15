@@ -3,25 +3,24 @@
         <div class="container availability-form">
             <div class="row">
                 <div class="col-lg-12 bg-white shadow p-4 rounded">
-                    <h5 class="mb-4">Vérifier la disponibilité de réservation</h5>
+                    <h5 class="mb-4">Check reservation availability</h5>
                     <form action="{{ route('reservation.showRooms') }}" method="POST">
                         @csrf
                         <div class="row align-items-end">
                             <div class="col-lg-3 mb-3">
-                                <label for="startdate" class="form-label" style="font-weight: 500;">Arrivée</label>
+                                <label for="startdate" class="form-label" style="font-weight: 500;">Arrival</label>
                                 <input type="date" class="form-control shadow-none" id="startdate" name="startdate"
                                     required>
                             </div>
                             <div class="col-lg-3 mb-3">
-                                <label for="enddate" class="form-label" style="font-weight: 500;">Départ</label>
+                                <label for="enddate" class="form-label" style="font-weight: 500;">Departure</label>
                                 <input type="date" class="form-control shadow-none" id="enddate" name="enddate"
                                     required>
                             </div>
                             <div class="col-lg-3 mb-3">
-                                <label for="room_type" class="form-label" style="font-weight: 500">Type de
-                                    chambre</label>
+                                <label for="room_type" class="form-label" style="font-weight: 500">Room type</label>
                                 <select class="form-select shadow-none" id="room_type" name="room_type" required>
-                                    <option value="">Sélectionner le type de chambre</option>
+                                    <option value="">Sselect room type</option>
                                     @foreach ($types as $type)
                                         <option value="{{ $type->type }}">{{ $type->type }}</option>
                                     @endforeach
@@ -29,7 +28,7 @@
                             </div>
                             <div class="col-lg-3 mb-lg-3 mt-2">
                                 <button type="submit"
-                                    class="btn text-white shadow-none custom-bg w-100">Chercher</button>
+                                    class="btn text-white shadow-none custom-bg w-100">Search</button>
                             </div>
                         </div>
                     </form>
@@ -51,37 +50,37 @@
                             <img src="{{ asset($firstImage) }}" class="card-img-top" style="height: 200px;">
                             <div class="card-body">
                                 <h5>{{ $room->numero }}</h5>
-                                <h6 class="mb-4">{{ $room->price }} MAD par nuit</h6>
+                                <h6 class="mb-4">{{ $room->price }} MAD per night</h6>
                                 <div class="features mb-4">
-                                    <h6 class="mb-1">Caractéristiques</h6>
+                                    <h6 class="mb-1">Features</h6>
                                     @if ($room->feature->number_of_rooms)
                                         <span
                                             class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->number_of_rooms }}
-                                            Chambres</span>
+                                            Rooms</span>
                                     @endif
                                     @if ($room->feature->number_of_beds)
                                         <span
                                             class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->number_of_beds }}
-                                            Lits</span>
+                                            Beds</span>
                                     @endif
                                     @if ($room->feature->bathroom)
                                         <span
                                             class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->bathroom }}
-                                            Salle de bain</span>
+                                            Bathroom</span>
                                     @endif
                                     @if ($room->feature->balcony)
                                         <span
                                             class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->balcony }}
-                                            Balcon</span>
+                                            Balcony</span>
                                     @endif
                                     @if ($room->feature->workspace)
                                         <span
                                             class="badge rounded-pill bg-light text-dark text-wrap">{{ $room->feature->workspace }}
-                                            Espace de travail</span>
+                                            Workspace</span>
                                     @endif
                                 </div>
                                 <div class="facilities mb-4">
-                                    <h6 class="mb-1">Équipements</h6>
+                                    <h6 class="mb-1">Equipment</h6>
                                     @if ($room->feature->TV == 1)
                                         <span class="badge rounded-pill bg-light text-dark text-wrap">TV</span>
                                     @endif
@@ -90,7 +89,7 @@
                                     @endif
                                 </div>
                                 <div class="rating nb-4">
-                                    <h6 class="mb-1">Évaluation</h6>
+                                    <h6 class="mb-1">Assessment</h6>
                                     <span class="badge rounded-pill bg-light">
                                         <i class="bi bi-star-fill text-warning"></i>
                                         <i class="bi bi-star-fill text-warning"></i>
@@ -102,7 +101,7 @@
                                     <a href="{{ route('payment.form', ['roomId' => $room->id, 'amount' => $room->price, 'startdate' => $startdate, 'enddate' => $enddate]) }}"
                                         class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
                                     <a href="{{ route('room.details', ['roomId' => $room->id, 'amount' => $room->price, 'startdate' => $startdate, 'enddate' => $enddate]) }}"
-                                        class="btn btn-sm btn-outline-dark shadow-none">Plus de détails</a>
+                                        class="btn btn-sm btn-outline-dark shadow-none">More details</a>
                                 </div>
                             </div>
                         </div>

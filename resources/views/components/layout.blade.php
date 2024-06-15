@@ -83,20 +83,21 @@
                         </li>
                     </ul>
 
-                    <div class="d-flex">
-                        <a href="/profile/{{ auth()->user()->username }}" class="mr-2"><img title="My Profile"
-                                data-toggle="tooltip" data-placement="bottom"
-                                style="width: 32px; height: 32px; border-radius: 16px"
-                                src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128" /></a>
+                    <<div class="d-flex align-items-center">
+                        <a href="/profile/{{ auth()->user()->username }}" class="me-3">
+                            {{-- <img title="My Profile" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;"
+                                src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128" /> --}}
+                        </a>
                         @if (auth()->user()->isAdmin)
-                            <a href="{{ route('dashboard') }}" class="btn btn-sm btn-primary">Dashboard</a>
+                            <a href="{{ route('dashboard') }}" class="btn btn-sm btn-primary me-2">Dashboard</a>
                         @endif
-                        <form action="/logout" method="POST" class="d-inline">
+                        <form action="/logout" method="POST" class="d-inline mb-0">
                             @csrf
                             <button class="btn btn-sm btn-secondary">Sign Out</button>
                         </form>
-                    </div>
                 </div>
+            </div>
             </div>
         </nav>
     @else
@@ -133,8 +134,8 @@
                             data-bs-target="#loginModal">
                             Login
                         </button>
-                        <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3"
-                            data-bs-toggle="modal" data-bs-target="#registerModal">
+                        <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal"
+                            data-bs-target="#registerModal">
                             Register
                         </button>
                     </div>

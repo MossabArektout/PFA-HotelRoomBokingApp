@@ -38,7 +38,7 @@
                 <input type="checkbox" id="minibar" name="minibar" value="1"><br /><br />
             </div>
             <div>
-                <button type="submit">Add Type</button>
+                <input type="submit" name="submit" value="Add Type" />
             </div>
         </form>
     </section>

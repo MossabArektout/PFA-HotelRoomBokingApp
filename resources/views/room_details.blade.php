@@ -43,8 +43,9 @@
                         <h4 class="mb-4">{{ $room->price }} MAD/nuit</h4>
                         <div class="facilities mb-4">
                             <h6 class="mb-1">Description</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut dui sit amet eros maximus
-                                faucibus</p>
+                            <p>Un hébergement luxueux offrant un espace et un confort supérieurs. Elle se compose
+                                généralement de plusieurs pièces, incluant un salon séparé avec canapé, fauteuils, table
+                                basse, et télévision à écran plat.</p>
                         </div>
                         <div class="features mb-4">
                             <h6 class="mb-1">Caractéristiques</h6>

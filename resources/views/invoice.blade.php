@@ -90,7 +90,7 @@
             <p>End Date: {{ $enddate }}</p>
         </div>
         <div class="total-amount">
-            <p>Total Amount: ${{ $room->price }}</p>
+            <p>Total Amount: {{ $amount }} MAD</p>
         </div>
         <div class="footer">
             <p>Thank you for choosing our service!</p>

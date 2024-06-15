@@ -52,7 +52,7 @@
                             </select>
                         </div>
                         <div class="col-lg-3 mb-lg-3 mt-2">
-                            <button type="submit" class="btn text-white shadow-none custom-bg w-100">Chercher</button>
+                            <button type="submit" class="btn text-white shadow-none custom-bg w-100">Search</button>
                         </div>
                     </div>
                 </form>

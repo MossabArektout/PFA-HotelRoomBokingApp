@@ -21,8 +21,8 @@ class UserController extends Controller
         $incomingFpields['password'] = bcrypt($incomingFields['password']);
 
         $user = User::create($incomingFields);
-        auth() -> login($user);
-        return redirect('/') -> with('success', 'Thank you for creating an account');
+        // auth() -> login($user);
+        return redirect('/') -> with('success', 'Thank you for creating an account, Please Login');
     }
     
     public function showCorrectHomepage(Types $types){

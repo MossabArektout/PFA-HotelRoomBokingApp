@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 my-5 px-4">
-                <h2 class="fw-bold">Confirm Boking</h2>
+                <h2 class="fw-bold">Confirm Booking</h2>
                 <div style="font-size: 14px;">
                     <a href="#" class="text-secondary text-decoration-none">Home</a>
                     <span class="text-secondary"> -> </span>

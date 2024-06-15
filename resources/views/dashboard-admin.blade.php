@@ -70,28 +70,29 @@
                 <div class="col">
                     <div class="card">
                         <h2>Total Clients</h2>
-                        <p>Le nombre total d'utilisateurs enregistrés : </p>
+                        <p>The total number of registered users : </p>
                         <p class="large-number">{{ $totalClients }}</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <h2>Total Bookings</h2>
-                        <p>Le nombre de réservations effectuées : </p>
+                        <p>The number of reservations made : </p>
                         <p class="large-number">{{ $totalOrders }}</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <h2>Revenue</h2>
-                        <p>Les revenus générés jusqu'à présent : </p>
-                        <p class="large-number">{{ $totalRevenue }}</p>
+                        <p>Revenue generated so far : </p>
+                        <p class="large-number">{{ $totalRevenue }} MAD</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <h2>Conversion Rate</h2>
-                        <p class="large-number">Placeholder for conversion rate.</p>
+                        <p>the revenue is growing by : </p>
+                        <p class="large-number">5% each month.</p>
                     </div>
                 </div>
             </div>

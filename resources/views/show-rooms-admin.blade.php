@@ -21,9 +21,9 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="action-btn"
-                                    onclick="return confirm('Are you sure you want to delete this incident?')">Supprimer</button>
+                                    onclick="return confirm('Are you sure you want to delete this incident?')">Delete</button>
                             </form>
-                            <a href="{{ route('admin.edit', $room) }}" class="action-btn">Modifier</a>
+                            <a href="{{ route('admin.edit', $room) }}" class="action-btn">Update</a>
                         </td>
                     </tr>
                 @endforeach
